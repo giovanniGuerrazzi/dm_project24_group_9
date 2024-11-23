@@ -6,3 +6,5 @@ dataset/
 
 # Ignora la cartella della cache Python
 __pycache__/
+
+.vscode/
