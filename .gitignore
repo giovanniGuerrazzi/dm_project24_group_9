@@ -7,4 +7,7 @@ dataset/
 # Ignora la cartella della cache Python
 __pycache__/
 
+# Ignora la cartella imgs
+/imgs
+
 .vscode/
