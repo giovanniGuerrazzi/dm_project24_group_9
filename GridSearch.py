@@ -8,7 +8,7 @@ matplotlib.use('Agg') # Used to disable the display of the graph
 import Classifier
 import statistics
 import numpy as np
-import seaborn as sns 
+import seaborn as sns
 import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
@@ -34,7 +34,8 @@ print("Dataset processing...")
 train_set = train_set.dropna()
 test_set = test_set.dropna()
 # Features
-features = ['avg_position','avg_position_1','avg_position_2','avg_position_3','avg_position_4']
+#features = ['avg_position','avg_position_1','avg_position_2','avg_position_3','avg_position_4']
+features = ['performance_wma', 'top20_consistency', 'races_dby_consistency']
 print("Features: ", features)
 # Split
 x_train = train_set[features]
@@ -63,11 +64,11 @@ y_train = y_train.to(device)
 x_test = x_test.to(device)
 y_test = y_test.to(device)
 # HYPERPARAMETER
-num_epochs = 10
+num_epochs = 100
 # Network configurations
 network_configs = [
-    {"layers": [5, 10, 25, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.0002, "momentum": 0.9, "learning_rate": 0.05},
-    {"layers": [5, 8, 10, 15, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.0002, "momentum": 0.9, "learning_rate": 0.05},
+    {"layers": [3, 6, 12, 24, 48, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.002, "momentum": 0.9, "learning_rate": 0.1},
+    #{"layers": [3, 8, 10, 15, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.0002, "momentum": 0.9, "learning_rate": 0.1},
     #{"layers": [10, 256, 256, 300, 3], "activation": "tanh", "optimizer": "sgd", "penality": 0.0005, "momentum": 0.8, "learning_rate": 0.003},
     # Add here others config
 ]
@@ -163,8 +164,8 @@ for number, config in enumerate(network_configs):
     predictions_train = torch.sigmoid(net(x_train)).cpu().detach().numpy()
     predictions_test = torch.sigmoid(net(x_test)).cpu().detach().numpy()
     binary_predictions_train = (predictions_train >= 0.5).astype(int)
-    binary_predictions_test = (predictions_test >= 0.5).astype(int)        
-        
+    binary_predictions_test = (predictions_test >= 0.5).astype(int)
+    
     confusion_matrix_train = confusion_matrix(y_train.cpu(), binary_predictions_train)
     scores = classification_report(y_train.cpu(), binary_predictions_train)
     
