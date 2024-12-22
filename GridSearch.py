@@ -64,11 +64,11 @@ y_train = y_train.to(device)
 x_test = x_test.to(device)
 y_test = y_test.to(device)
 # HYPERPARAMETER
-num_epochs = 100
+num_epochs = 10
 # Network configurations
 network_configs = [
-    {"layers": [3, 6, 12, 24, 48, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.002, "momentum": 0.9, "learning_rate": 0.1},
-    #{"layers": [3, 8, 10, 15, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.0002, "momentum": 0.9, "learning_rate": 0.1},
+    #{"layers": [3, 6, 12, 24, 48, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.002, "momentum": 0.9, "learning_rate": 0.1},
+    {"layers": [3, 8, 10, 15, 1], "activation": "tanh", "optimizer": "sgd", "penality": 0.0002, "momentum": 0.9, "learning_rate": 0.1},
     #{"layers": [10, 256, 256, 300, 3], "activation": "tanh", "optimizer": "sgd", "penality": 0.0005, "momentum": 0.8, "learning_rate": 0.003},
     # Add here others config
 ]
@@ -163,11 +163,30 @@ for number, config in enumerate(network_configs):
     # Create predictions
     predictions_train = torch.sigmoid(net(x_train)).cpu().detach().numpy()
     predictions_test = torch.sigmoid(net(x_test)).cpu().detach().numpy()
-    binary_predictions_train = (predictions_train >= 0.5).astype(int)
-    binary_predictions_test = (predictions_test >= 0.5).astype(int)
+    #
+    print(predictions_train)
+    print('Sorting...')
+    # Sort descending
+    predictions_train = np.sort(predictions_train, axis=0)[::-1]
+    predictions_test = np.sort(predictions_test, axis=0)[::-1]
+    print(predictions_train)
+    #binary_predictions_train = (predictions_train >= 0.5).astype(int)
+    #binary_predictions_test = (predictions_test >= 0.5).astype(int)
+    # Assign to 1 the top 20  of the predictions
+    for i in range(len(predictions_train)):
+        if i < 20:
+            predictions_train[i] = 1
+        else:
+            predictions_train[i] = 0
+            
+    for i in range(len(predictions_test)):
+        if i < 20:
+            predictions_test[i] = 1
+        else:
+            predictions_test[i] = 0
     
-    confusion_matrix_train = confusion_matrix(y_train.cpu(), binary_predictions_train)
-    scores = classification_report(y_train.cpu(), binary_predictions_train)
+    confusion_matrix_train = confusion_matrix(y_train.cpu(), predictions_train)
+    scores = classification_report(y_train.cpu(), predictions_train)
     
     # Save the confusion matrix to png
     plt.figure(figsize=(10, 7))
@@ -182,8 +201,8 @@ for number, config in enumerate(network_configs):
         file.write(scores)
     
     # TESTING
-    confusion_matrix_test = confusion_matrix(y_test.cpu(), binary_predictions_test)
-    scores = classification_report(y_test.cpu(), binary_predictions_test)
+    confusion_matrix_test = confusion_matrix(y_test.cpu(), predictions_test)
+    scores = classification_report(y_test.cpu(), predictions_test)
     
     # Generate confusion matrix png
     plt.figure(figsize=(10, 7))
