@@ -10,4 +10,7 @@ __pycache__/
 # Ignora la cartella imgs
 /imgs
 
+# Ignora cartella stuffs
+/stuffs
+
 .vscode/
