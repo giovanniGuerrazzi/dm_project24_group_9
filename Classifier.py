@@ -1,9 +1,11 @@
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 class Classifier(nn.Module):
-    def __init__(self, layers:list, structure:list, activation:str):
+    def __init__(self, layers:list, structure:list, activation:str, seed=42):
         super(Classifier, self).__init__()
+        torch.manual_seed(seed)
         self.activation = activation
         self.layers = nn.ModuleList()
         for i in range(len(layers) - 1):
