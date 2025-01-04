@@ -5,16 +5,19 @@ import seaborn as sns
 from tqdm import tqdm
 import plotly.express as px
 import matplotlib.pyplot as plt
+from matplotlib.cm import get_cmap
 from sklearn.cluster import KMeans
 from sklearn.cluster import DBSCAN
 from pyclustering.cluster.xmeans import xmeans
 from sklearn.cluster import AgglomerativeClustering
+from scipy.cluster.hierarchy import dendrogram, linkage
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.metrics import silhouette_score as sk_silhouette_score
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from tslearn.clustering import silhouette_score as ts_silhouette_score
 from sklearn.metrics import davies_bouldin_score as sk_davies_bouldin_score
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
 
 
 # Calculate the BMI
@@ -402,7 +405,8 @@ def clustering_X_means(data, features, max_k, title='Clustering X_means', thd_pl
 
 
 # This function is used to cluster the data using Agglomerate (Hierarchical Clustering)
-def clustering_Agglomerate(data, features, max_k, title='Clustering Agglomerate', thd_plot=False, thd_view=False, normalize_type='standard', linkage='ward', metric='euclidean', K=None):
+def clustering_Agglomerate(data, features, max_k, title='Clustering Agglomerate', thd_plot=False, thd_view=False, 
+                           normalize_type='standard', linkage_method='ward', metric='euclidean', K=None, plot_dendrogram=True):
     # Extract the values from the dataset
     X = extract_values(data, features)
     # Normalize the data
@@ -411,55 +415,96 @@ def clustering_Agglomerate(data, features, max_k, title='Clustering Agglomerate'
     plot_sse(X_normalized, max_k)
     # Plot the silhouette score
     silhouette_scores = plot_silhouette_score(X_normalized, max_k, False)
-    # Plot the davies bouldin score
+    # Plot the Davies-Bouldin score
     davies_bouldins = plot_davies_bouldin_score(X_normalized, max_k, False)
-    # From the two best calculated K
+    # Determine the best number of clusters
     best_k = calculate_best_k(silhouette_scores, davies_bouldins)
     if K is not None:
         n_clusters = K
     else:
         n_clusters = best_k
     print(f'Number of clusters: {n_clusters}')
+    
+    # Create the dendrogram if required
+    cluster_colors = {}
+    if plot_dendrogram:
+        print("Generating dendrogram...")
+        Z = linkage(X_normalized, method=linkage_method, metric=metric)
+        
+        # Automatically calculate a threshold based on the desired number of clusters
+        max_d = Z[-n_clusters, 2] if n_clusters is not None else 0.4
+
+        plt.figure(figsize=(10, 7))
+        dend = dendrogram(
+            Z,
+            truncate_mode='lastp',  # Show the last merges
+            color_threshold=max_d,  # Threshold for cluster colors
+            above_threshold_color='gray',  # Color above the threshold
+        )
+        plt.axhline(y=max_d, color='red', linestyle='--', label=f'Threshold: {max_d:.2f}')
+        plt.title(f"Dendrogram ({linkage_method.capitalize()} Linkage)")
+        plt.legend()
+        plt.show()
+
+        # Extract colors assigned by the dendrogram
+        for leaf, color in zip(dend['leaves'], dend['leaves_color_list']):
+            cluster_colors[leaf] = color
+
     # Create the AgglomerativeClustering model
-    cluster = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage)
+    cluster = AgglomerativeClustering(n_clusters=n_clusters, linkage=linkage_method)
     # Create dataframe
     X_normalized_df = pd.DataFrame(X_normalized, columns=features)
     # Fit the model
     clusters = cluster.fit_predict(X_normalized_df)
-    # Plot
-    n_clusters = len(np.unique(clusters))
     # Add the cluster labels to the dataframe
     X_normalized_df['Cluster'] = clusters
+
+    # Create a colormap for the scatter plot
+    unique_clusters = np.unique(clusters)
+    colormap = get_cmap('tab10', len(unique_clusters))
+    scatter_colors = [colormap(cluster_id) for cluster_id in unique_clusters]
+
+    # Scatter plot with cluster colors matching the dendrogram
+    # Add the cluster labels to the dataframe
+    X_normalized_df['Cluster'] = clusters
+
     # Use pairplot to visualize each pair of features
     sns.pairplot(X_normalized_df, hue='Cluster', palette=sns.color_palette(n_colors=n_clusters))
+
     # Add features to the title
     str_features = ' - '
     for feature in features:
         str_features += feature + ' '
+
     plt.suptitle(title + str_features, y=1.02)
     plt.show()
 
-    if features.__len__() == 3:
-        if thd_plot: # 3D plot
-                fig = plt.figure()
-                ax = fig.add_subplot(111, projection='3d')
-                ax.scatter(X_normalized_df[features[0]], 
-                           X_normalized_df[features[1]], 
-                           X_normalized_df[features[2]], 
-                           c=clusters.labels_, 
-                           cmap='viridis')
-                ax.set_xlabel(features[0])
-                ax.set_ylabel(features[1])
-                ax.set_zlabel(features[2])
-                ax.set_title("3D - " + title + str_features)
-                plt.show()
-        if thd_view: # 3D plot with plotly
-            fig = px.scatter_3d( X_normalized_df,
+    # 3D Visualization (if 3 features)
+    if len(features) == 3:
+        if thd_plot:  # 3D plot with matplotlib
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            for cluster_id in unique_clusters:
+                cluster_data = X_normalized_df[X_normalized_df['Cluster'] == cluster_id]
+                ax.scatter(
+                    cluster_data[features[0]], cluster_data[features[1]], cluster_data[features[2]],
+                    color=scatter_colors[cluster_id], label=f"Cluster {cluster_id}"
+                )
+            ax.set_xlabel(features[0])
+            ax.set_ylabel(features[1])
+            ax.set_zlabel(features[2])
+            ax.set_title(f"3D - {title}")
+            plt.legend()
+            plt.show()
+        if thd_view:  # 3D plot with Plotly
+            import plotly.express as px
+            fig = px.scatter_3d(
+                X_normalized_df,
                 x=features[0],
                 y=features[1],
                 z=features[2],
                 color='Cluster',
-                title="3D - " + title + str_features,
+                title=f"3D - {title}",
                 labels={
                     features[0]: features[0],
                     features[1]: features[1],
@@ -467,17 +512,13 @@ def clustering_Agglomerate(data, features, max_k, title='Clustering Agglomerate'
                     'Cluster': 'Cluster ID'
                 }
             )
-
-            # Custom layout
             fig.update_layout(
                 legend=dict(
-                    title='Cluster ID',  # Title of the legend
-                    x=1,  # Position orizontal
-                    y=1  # Position vertical
+                    title='Cluster ID',
+                    x=1,
+                    y=1
                 )
             )
-
-            # Show the plot 3D
             fig.show()
     else:
         if thd_plot or thd_view:
