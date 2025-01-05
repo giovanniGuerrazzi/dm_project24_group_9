@@ -1,0 +1,545 @@
+Best Hyperparameters: 
+n_estimators=200,criterion="gini",max_depth=10,min_samples_split=2,min_samples_leaf=5,class_weight="balanced",random_state=42
+
+Model: RF
+Dataset: dataset_non_normalizzato
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'avg_position_3', 'avg_position_4', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.79     29163
+           1       0.29      0.73      0.41      5095
+
+    accuracy                           0.69     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.69      0.74     34258
+
+Confusion Matrix:
+	19994	9169
+	1370	3725
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_oversampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'avg_position_3', 'avg_position_4', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.66      0.77     29163
+           1       0.27      0.74      0.40      5095
+
+    accuracy                           0.67     34258
+   macro avg       0.61      0.70      0.59     34258
+weighted avg       0.84      0.67      0.72     34258
+
+Confusion Matrix:
+	19142	10021
+	1304	3791
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_undersampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'avg_position_3', 'avg_position_4', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.67      0.78     29163
+           1       0.28      0.74      0.41      5095
+
+    accuracy                           0.68     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.68      0.73     34258
+
+Confusion Matrix:
+	19557	9606
+	1305	3790
+--------------------------------------------------
+Best Hyperparameters:
+n_estimators=200,criterion="gini",max_depth=10,min_samples_split=2,min_samples_leaf=2,class_weight="balanced",random_state=42
+
+Model: RF
+Dataset: dataset_normalizzato
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'avg_position_3_startlist', 'avg_position_4_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.80      0.85     29391
+           1       0.32      0.55      0.41      5118
+
+    accuracy                           0.76     34509
+   macro avg       0.62      0.67      0.63     34509
+weighted avg       0.82      0.76      0.78     34509
+
+Confusion Matrix:
+	23441	5950
+	2304	2814
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_oversampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'avg_position_3_startlist', 'avg_position_4_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.76      0.83     29391
+           1       0.29      0.57      0.39      5118
+
+    accuracy                           0.73     34509
+   macro avg       0.60      0.67      0.61     34509
+weighted avg       0.82      0.73      0.76     34509
+
+Confusion Matrix:
+	22357	7034
+	2181	2937
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_undersampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'avg_position_3_startlist', 'avg_position_4_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.77      0.84     29391
+           1       0.31      0.59      0.40      5118
+
+    accuracy                           0.74     34509
+   macro avg       0.61      0.68      0.62     34509
+weighted avg       0.82      0.74      0.77     34509
+
+Confusion Matrix:
+	22663	6728
+	2123	2995
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'avg_position_3', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.79     29163
+           1       0.29      0.73      0.41      5095
+
+    accuracy                           0.69     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.69      0.74     34258
+
+Confusion Matrix:
+	20019	9144
+	1378	3717
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_oversampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'avg_position_3', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.66      0.78     29163
+           1       0.28      0.74      0.40      5095
+
+    accuracy                           0.67     34258
+   macro avg       0.61      0.70      0.59     34258
+weighted avg       0.84      0.67      0.72     34258
+
+Confusion Matrix:
+	19294	9869
+	1328	3767
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_undersampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'avg_position_3', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.67      0.78     29163
+           1       0.28      0.74      0.41      5095
+
+    accuracy                           0.68     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.68      0.73     34258
+
+Confusion Matrix:
+	19549	9614
+	1310	3785
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'avg_position_3_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.80      0.85     29391
+           1       0.32      0.55      0.40      5118
+
+    accuracy                           0.76     34509
+   macro avg       0.62      0.67      0.63     34509
+weighted avg       0.82      0.76      0.78     34509
+
+Confusion Matrix:
+	23395	5996
+	2301	2817
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_oversampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'avg_position_3_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.76      0.83     29391
+           1       0.30      0.57      0.39      5118
+
+    accuracy                           0.73     34509
+   macro avg       0.60      0.67      0.61     34509
+weighted avg       0.82      0.73      0.76     34509
+
+Confusion Matrix:
+	22366	7025
+	2178	2940
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_undersampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'avg_position_3_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.77      0.84     29391
+           1       0.31      0.58      0.40      5118
+
+    accuracy                           0.75     34509
+   macro avg       0.61      0.68      0.62     34509
+weighted avg       0.82      0.75      0.77     34509
+
+Confusion Matrix:
+	22748	6643
+	2138	2980
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.79     29163
+           1       0.29      0.73      0.42      5095
+
+    accuracy                           0.69     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.69      0.74     34258
+
+Confusion Matrix:
+	20051	9112
+	1375	3720
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_oversampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.66      0.78     29163
+           1       0.28      0.74      0.40      5095
+
+    accuracy                           0.67     34258
+   macro avg       0.61      0.70      0.59     34258
+weighted avg       0.84      0.67      0.72     34258
+
+Confusion Matrix:
+	19338	9825
+	1321	3774
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_undersampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'avg_position_2', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.67      0.78     29163
+           1       0.28      0.75      0.41      5095
+
+    accuracy                           0.68     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.68      0.73     34258
+
+Confusion Matrix:
+	19573	9590
+	1299	3796
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.80      0.85     29391
+           1       0.32      0.55      0.41      5118
+
+    accuracy                           0.76     34509
+   macro avg       0.62      0.68      0.63     34509
+weighted avg       0.82      0.76      0.78     34509
+
+Confusion Matrix:
+	23423	5968
+	2284	2834
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_oversampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.76      0.83     29391
+           1       0.30      0.58      0.39      5118
+
+    accuracy                           0.73     34509
+   macro avg       0.60      0.67      0.61     34509
+weighted avg       0.82      0.73      0.76     34509
+
+Confusion Matrix:
+	22352	7039
+	2142	2976
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_undersampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'avg_position_2_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.77      0.84     29391
+           1       0.31      0.58      0.40      5118
+
+    accuracy                           0.74     34509
+   macro avg       0.61      0.68      0.62     34509
+weighted avg       0.82      0.74      0.77     34509
+
+Confusion Matrix:
+	22700	6691
+	2130	2988
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato
+Feature Dataset: ['avg_position', 'avg_position_1', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.79     29163
+           1       0.29      0.73      0.42      5095
+
+    accuracy                           0.69     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.69      0.74     34258
+
+Confusion Matrix:
+	20059	9104
+	1367	3728
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_oversampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.66      0.77     29163
+           1       0.28      0.75      0.40      5095
+
+    accuracy                           0.67     34258
+   macro avg       0.61      0.70      0.59     34258
+weighted avg       0.84      0.67      0.72     34258
+
+Confusion Matrix:
+	19241	9922
+	1296	3799
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_undersampling
+Feature Dataset: ['avg_position', 'avg_position_1', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.67      0.78     29163
+           1       0.28      0.75      0.41      5095
+
+    accuracy                           0.68     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.68      0.73     34258
+
+Confusion Matrix:
+	19549	9614
+	1273	3822
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.80      0.85     29391
+           1       0.32      0.56      0.41      5118
+
+    accuracy                           0.76     34509
+   macro avg       0.62      0.68      0.63     34509
+weighted avg       0.82      0.76      0.78     34509
+
+Confusion Matrix:
+	23431	5960
+	2275	2843
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_oversampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.76      0.83     29391
+           1       0.30      0.58      0.39      5118
+
+    accuracy                           0.73     34509
+   macro avg       0.60      0.67      0.61     34509
+weighted avg       0.82      0.73      0.76     34509
+
+Confusion Matrix:
+	22327	7064
+	2133	2985
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_undersampling
+Feature Dataset: ['avg_position_startlist', 'avg_position_1_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.77      0.84     29391
+           1       0.31      0.58      0.40      5118
+
+    accuracy                           0.74     34509
+   macro avg       0.61      0.68      0.62     34509
+weighted avg       0.82      0.74      0.77     34509
+
+Confusion Matrix:
+	22719	6672
+	2139	2979
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato
+Feature Dataset: ['avg_position', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.69      0.79     29163
+           1       0.29      0.73      0.42      5095
+
+    accuracy                           0.69     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.69      0.74     34258
+
+Confusion Matrix:
+	19990	9173
+	1359	3736
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_oversampling
+Feature Dataset: ['avg_position', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.66      0.78     29163
+           1       0.28      0.74      0.40      5095
+
+    accuracy                           0.68     34258
+   macro avg       0.61      0.70      0.59     34258
+weighted avg       0.84      0.68      0.72     34258
+
+Confusion Matrix:
+	19357	9806
+	1318	3777
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_non_normalizzato_con_undersampling
+Feature Dataset: ['avg_position', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.94      0.67      0.78     29163
+           1       0.28      0.75      0.41      5095
+
+    accuracy                           0.68     34258
+   macro avg       0.61      0.71      0.60     34258
+weighted avg       0.84      0.68      0.73     34258
+
+Confusion Matrix:
+	19492	9671
+	1277	3818
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato
+Feature Dataset: ['avg_position_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.80      0.85     29391
+           1       0.32      0.55      0.41      5118
+
+    accuracy                           0.76     34509
+   macro avg       0.62      0.68      0.63     34509
+weighted avg       0.82      0.76      0.79     34509
+
+Confusion Matrix:
+	23474	5917
+	2295	2823
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_oversampling
+Feature Dataset: ['avg_position_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.75      0.83     29391
+           1       0.30      0.59      0.39      5118
+
+    accuracy                           0.73     34509
+   macro avg       0.60      0.67      0.61     34509
+weighted avg       0.82      0.73      0.76     34509
+
+Confusion Matrix:
+	22174	7217
+	2089	3029
+--------------------------------------------------
+
+Model: RF
+Dataset: dataset_normalizzato_con_undersampling
+Feature Dataset: ['avg_position_startlist', 'performance_wma', 'top20_consistency', 'races_dby_consistency', 'participants']
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.77      0.84     29391
+           1       0.31      0.58      0.40      5118
+
+    accuracy                           0.74     34509
+   macro avg       0.61      0.68      0.62     34509
+weighted avg       0.82      0.74      0.77     34509
+
+Confusion Matrix:
+	22740	6651
+	2168	2950
+--------------------------------------------------
+
